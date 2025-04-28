@@ -28,6 +28,8 @@ const { title } = Astro.props;
 
       /* Global theme styles */
       :global(:root) {
+        --btn-fill:rgba(255,255,255,0.1);
+        --btn-border:#fff;
         --bg-color: #000;
         --text-color: #fff;
         --border-color: #333;
@@ -44,6 +46,8 @@ const { title } = Astro.props;
       }
 
       :global([data-theme="light"]) {
+        --btn-fill:#fff;
+        --btn-border:rgba(0, 0, 0, 0.2);
         --bg-color: #fff;
         --text-color: #000;
         --border-color: #ccc;

@@ -1,11 +1,132 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ServiceCard from '../components/ServiceCard.astro';
 ---
 
 <Layout title="Services">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+    :global(.y-icon) {
+      width: 24px;
+      height: 24px;
+      fill: var(--text-color);
+    }
+    :global(.hero) {
+      background: url('/images/hero-bg.jpg') no-repeat center/cover;
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+    :global(.services-grid) {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+    }
+    :global(.service-card) {
+      /* Glassmorphism styles */
+      background: var(--card-bg); /* Using global variable */
+      backdrop-filter: blur(10px); /* Frosted glass blur effect */
+      -webkit-backdrop-filter: blur(10px); /* For Safari support */
+      border: 1px solid var(--card-border); /* Using global variable */
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Soft shadow */
+    }
+    :global(.service-card:hover) {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+    }
+    :global(.service-card img) {
+      width: 32px;
+      height: 32px;
+      margin-bottom: 1rem;
+    }
+    :global(.service-card h2) {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    :global(.service-card p) {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+    :global(.cta-button) {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: var(--btn-fill); 
+      border: 2px solid var(--btn-border);
+      color: var(--text-color);
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background 0.3s ease, border 0.3s ease;
+    }
+    :global(.testimonials) {
+      padding: 2rem;
+      text-align: center;
+    }
+    :global(.testimonials h2) {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    :global(.testimonial p) {
+      font-style: italic;
+    }
+    :global(.testimonial cite) {
+      display: block;
+      margin-top: 0.5rem;
+    }
+    :global(.icon-container) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
   </style>
-  <h1>Services</h1>
-  <p>This is the Services page. Add your services here.</p>
+
+  <section class="hero">
+    <h1>Our Services</h1>
+    <p>Transform your business with our expert solutions.</p>
+    <a href="#services" class="cta-button">Explore Services</a>
+  </section>
+
+  <section id="services" class="services-grid">
+    <ServiceCard
+      title="Web Development"
+      description="Custom-built websites tailored to your business needs."
+      icon="/web-cion.png"
+      ctaText="Get a Quote"
+      ctaLink="/contact"
+    />
+    <ServiceCard
+      title="UI/UX Design"
+      description="User-focused design for intuitive digital experiences."
+      icon="/ux-design.png"
+      ctaText="Start Your Project"
+      ctaLink="/contact"
+    />
+    <ServiceCard
+      title="SEO Optimization"
+      description="Boost your site's ranking with our proven SEO strategies."
+      icon="/search-location.png"
+      ctaText="Learn More"
+      ctaLink="/contact"
+    />
+  </section>
+
+  <section class="testimonials">
+    <h2>What Our Clients Say</h2>
+    <div class="testimonial">
+      <p>"The team delivered an amazing website that boosted our conversions!"</p>
+      <cite>- Jane Doe, CEO of Example Co.</cite>
+    </div>
+  </section>
+
+  <div class="icon-container">
+    <a href="/">
+      <svg class="y-icon" viewBox="0 0 24 24">
+        <path d="M5 2v10h5v10h4v-10h5V2h-5v7h-4V2H5z" />
+      </svg>
+    </a>
+  </div>
 </Layout>
