@@ -1,0 +1,160 @@
+---
+---
+
+<style>
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .y-icon {
+    width: 24px;
+    height: 24px;
+    fill: var(--text-color);
+  }
+
+  nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    margin: 0 0.5rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+  }
+
+  nav a:hover {
+    color: var(--hover-color);
+  }
+
+  .nav-left a:not([href="/"]) {
+    position: relative;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    background: none;
+    border: none;
+    padding-bottom: 2px;
+  }
+
+  .nav-left a:not([href="/"])::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background: #ffffff; /* Red underline */
+    display: block;
+    bottom: 0;
+    left: 0;
+    transition: width 0.5s;
+  }
+
+  .nav-left a:not([href="/"]):hover::after {
+    width: 100%;
+  }
+
+  .custom-hire-btn {
+    position: relative;
+    height: 40px;
+    padding: 0 20px;
+    border: 2px solid var(--text-color);
+    background: var(--bg-color);
+    user-select: none;
+    white-space: nowrap;
+    transition: all .05s linear;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-color);
+  }
+
+  .custom-hire-btn:before, .custom-hire-btn:after {
+    content: "";
+    position: absolute;
+    background: var(--bg-color);
+    transition: all .2s linear;
+  }
+
+  .custom-hire-btn:before {
+    width: calc(100% + 6px);
+    height: calc(100% - 16px);
+    top: 8px;
+    left: -3px;
+  }
+
+  .custom-hire-btn:after {
+    width: calc(100% - 16px);
+    height: calc(100% + 6px);
+    top: -3px;
+    left: 8px;
+  }
+
+  .custom-hire-btn:hover {
+    cursor: default;
+  }
+
+  .custom-hire-btn:active {
+    transform: scale(0.95);
+  }
+
+  .custom-hire-btn:hover:before {
+    height: calc(100% - 32px);
+    top: 16px;
+  }
+
+  .custom-hire-btn:hover:after {
+    width: calc(100% - 32px);
+    left: 16px;
+  }
+
+  .custom-hire-btn span {
+    font-size: 13px;
+    z-index: 3;
+    position: relative;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  @media (min-width: 768px) {
+    nav {
+      padding: 1.5rem 2rem;
+    }
+
+    .nav-left {
+      gap: 1rem;
+    }
+
+    nav a {
+      margin: 0 1rem;
+      font-size: 1rem;
+    }
+
+    .custom-hire-btn {
+      height: 50px;
+      padding: 0 30px;
+    }
+
+    .custom-hire-btn span {
+      font-size: 15px;
+    }
+  }
+</style>
+
+<nav>
+  <div class="nav-left">
+    <a href="/">
+      <svg class="y-icon" viewBox="0 0 24 24">
+        <path d="M5 2v10h5v10h4v-10h5V2h-5v7h-4V2H5z" />
+      </svg>
+    </a>
+    <a href="/about">About Me</a>
+    <a href="/services">Services</a>
+  </div>
+  <button class="custom-hire-btn" id="hireBtn">
+    <span>Hire Me</span>
+  </button>
+</nav>
