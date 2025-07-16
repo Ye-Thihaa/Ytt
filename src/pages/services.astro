@@ -12,9 +12,11 @@ import ServiceCard from '../components/ServiceCard.astro';
       fill: var(--text-color);
     }
     :global(.hero) {
-      background: url('/images/hero-bg.jpg') no-repeat center/cover;
+      /* Temporarily remove background image until resolved */
+      /* background: url('/images/hero-bg.jpg') no-repeat center/cover; */
       text-align: center;
       padding: 4rem 2rem;
+      background-color: var(--bg-color); /* Fallback to a solid color */
     }
     :global(.services-grid) {
       display: grid;
@@ -23,20 +25,19 @@ import ServiceCard from '../components/ServiceCard.astro';
       padding: 2rem;
     }
     :global(.service-card) {
-      /* Glassmorphism styles */
-      background: var(--card-bg); /* Using global variable */
-      backdrop-filter: blur(10px); /* Frosted glass blur effect */
-      -webkit-backdrop-filter: blur(10px); /* For Safari support */
-      border: 1px solid var(--card-border); /* Using global variable */
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--card-border);
       border-radius: 12px;
       padding: 1.5rem;
       text-align: center;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Soft shadow */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
     :global(.service-card:hover) {
       transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     }
     :global(.service-card img) {
       width: 32px;
@@ -54,12 +55,13 @@ import ServiceCard from '../components/ServiceCard.astro';
     :global(.cta-button) {
       display: inline-block;
       padding: 0.5rem 1rem;
-      background: var(--btn-fill); 
+      background: var(--btn-fill);
       border: 2px solid var(--btn-border);
       color: var(--text-color);
       text-decoration: none;
       border-radius: 4px;
       transition: background 0.3s ease, border 0.3s ease;
+      cursor: pointer;
     }
     :global(.testimonials) {
       padding: 2rem;
@@ -96,21 +98,21 @@ import ServiceCard from '../components/ServiceCard.astro';
       description="Custom-built websites tailored to your business needs."
       icon="/web-cion.png"
       ctaText="Get a Quote"
-      ctaLink="/contact"
+      ctaLink="mailto:yethihaahtun@gmail.com?subject=Web%20Development%20Quote&body=Hello,%20I%20am%20interested%20in%20your%20web%20development%20services.%20Please%20provide%20more%20details."
     />
     <ServiceCard
       title="UI/UX Design"
       description="User-focused design for intuitive digital experiences."
       icon="/ux-design.png"
       ctaText="Start Your Project"
-      ctaLink="/contact"
+      ctaLink="mailto:yethihaahtun@gmail.com?subject=UI/UX%20Design%20Project&body=Hello,%20I%20am%20interested%20in%20your%20UI/UX%20design%20services.%20Please%20provide%20more%20details."
     />
     <ServiceCard
       title="SEO Optimization"
       description="Boost your site's ranking with our proven SEO strategies."
       icon="/search-location.png"
       ctaText="Learn More"
-      ctaLink="/contact"
+      ctaLink="mailto:yethihaahtun@gmail.com?subject=SEO%20Optimization%20Inquiry&body=Hello,%20I%20am%20interested%20in%20your%20SEO%20optimization%20services.%20Please%20provide%20more%20details."
     />
   </section>
 
@@ -129,4 +131,19 @@ import ServiceCard from '../components/ServiceCard.astro';
       </svg>
     </a>
   </div>
+
+  <script type="module">
+    document.addEventListener("DOMContentLoaded", () => {
+      const ctaButtons = document.querySelectorAll(".cta-button");
+      ctaButtons.forEach(button => {
+        button.addEventListener("click", (event) => {
+          const href = button.getAttribute("href");
+          if (href && href.startsWith("mailto:")) {
+            event.preventDefault(); // Prevent default if needed
+            window.location.href = href; // Trigger mailto directly
+          }
+        });
+      });
+    });
+  </script>
 </Layout>
