@@ -98,21 +98,21 @@ import ServiceCard from '../components/ServiceCard.astro';
       description="Custom-built websites tailored to your business needs."
       icon="/web-cion.png"
       ctaText="Get a Quote"
-      ctaLink="mailto:yethihaahtun@gmail.com?subject=Web%20Development%20Quote&body=Hello,%20I%20am%20interested%20in%20your%20web%20development%20services.%20Please%20provide%20more%20details."
+      ctaLink="/contact"
     />
     <ServiceCard
       title="UI/UX Design"
       description="User-focused design for intuitive digital experiences."
       icon="/ux-design.png"
       ctaText="Start Your Project"
-      ctaLink="mailto:yethihaahtun@gmail.com?subject=UI/UX%20Design%20Project&body=Hello,%20I%20am%20interested%20in%20your%20UI/UX%20design%20services.%20Please%20provide%20more%20details."
+      ctaLink="/contact"
     />
     <ServiceCard
       title="SEO Optimization"
       description="Boost your site's ranking with our proven SEO strategies."
       icon="/search-location.png"
       ctaText="Learn More"
-      ctaLink="mailto:yethihaahtun@gmail.com?subject=SEO%20Optimization%20Inquiry&body=Hello,%20I%20am%20interested%20in%20your%20SEO%20optimization%20services.%20Please%20provide%20more%20details."
+      ctaLink="/contact"
     />
   </section>
 
@@ -131,19 +131,4 @@ import ServiceCard from '../components/ServiceCard.astro';
       </svg>
     </a>
   </div>
-
-  <script type="module">
-    document.addEventListener("DOMContentLoaded", () => {
-      const ctaButtons = document.querySelectorAll(".cta-button");
-      ctaButtons.forEach(button => {
-        button.addEventListener("click", (event) => {
-          const href = button.getAttribute("href");
-          if (href && href.startsWith("mailto:")) {
-            event.preventDefault(); // Prevent default if needed
-            window.location.href = href; // Trigger mailto directly
-          }
-        });
-      });
-    });
-  </script>
 </Layout>

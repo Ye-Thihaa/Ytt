@@ -1,0 +1,178 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contact Us">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+    :global(.y-icon) {
+      width: 24px;
+      height: 24px;
+      fill: var(--text-color);
+    }
+    :global(.hero) {
+      text-align: center;
+      padding: 4rem 2rem;
+      background-color: var(--bg-color);
+    }
+    :global(.contact-container) {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    :global(.contact-card) {
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    :global(.contact-card:hover) {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+    :global(.contact-card h2) {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    :global(.contact-card p) {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+    :global(.contact-form) {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    :global(.contact-form input),
+    :global(.contact-form textarea) {
+      padding: 0.5rem;
+      border: 1px solid var(--card-border);
+      border-radius: 4px;
+      background: var(--card-bg);
+      color: var(--text-color);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    :global(.contact-form button) {
+      padding: 0.5rem 1rem;
+      background: var(--btn-fill);
+      border: 2px solid var(--btn-border);
+      color: var(--text-color);
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background 0.3s ease, border 0.3s ease;
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    :global(.contact-form button:disabled) {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+    :global(.contact-info) {
+      margin-top: 1rem;
+    }
+    :global(.contact-info a) {
+      color: var(--text-color);
+      text-decoration: none;
+    }
+    :global(.contact-info a:hover) {
+      text-decoration: underline;
+    }
+    :global(.icon-container) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+    :global(.success-message) {
+      color: green;
+      margin-top: 1rem;
+      display: none;
+    }
+  </style>
+
+  <section class="hero">
+    <h1>Contact Us</h1>
+    <p>Reach out to discuss your project or learn more about our services.</p>
+  </section>
+
+  <section class="contact-container">
+    <div class="contact-card">
+      <h2>Send Us a Message</h2>
+      <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit">Submit</button>
+      </form>
+      <p class="success-message" id="success-message">Thank you! Your message has been sent.</p>
+    </div>
+    <div class="contact-card">
+      <h2>Contact Information</h2>
+      <p class="contact-info">
+        Email: <a href="mailto:yethihaahtun@gmail.com">yethihaahtun@gmail.com</a>
+      </p>
+      <p class="contact-info">
+        Phone: <a href="tel:+959765487538">+959765487538</a>
+      </p>
+    </div>
+  </section>
+
+  <div class="icon-container">
+    <a href="/">
+      <svg class="y-icon" viewBox="0 0 24 24">
+        <path d="M5 2v10h5v10h4v-10h5V2h-5v7h-4V2H5z" />
+      </svg>
+    </a>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.querySelector('.contact-form');
+      const submitButton = form.querySelector('button');
+      const successMessage = document.getElementById('success-message');
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault(); // Prevent default form submission
+
+        // Show loading state
+        submitButton.disabled = true;
+        submitButton.textContent = 'Submitting...';
+
+        fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: {
+            'Accept': 'application/json'
+          }
+        })
+        .then(response => {
+          if (response.ok) {
+            form.reset();
+            successMessage.style.display = 'block';
+            setTimeout(() => {
+              successMessage.style.display = 'none';
+            }, 5000);
+          } else {
+            alert('There was an error sending your message. Please try again.');
+          }
+        })
+        .catch(error => {
+          alert('There was an error sending your message. Please try again.');
+        })
+        .finally(() => {
+          // Reset loading state
+          submitButton.disabled = false;
+          submitButton.textContent = 'Submit';
+        });
+      });
+    });
+  </script>
+</Layout>
